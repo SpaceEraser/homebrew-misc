@@ -3,9 +3,9 @@ require "formula"
 class Terra < Formula
   desc "A low-level system programming language that is designed to interoperate seamlessly with the Lua programming language"
   homepage "http://terralang.org/"
-  url "https://github.com/zdevito/terra/archive/release-2015-07-21.tar.gz"
-  version "2015-07-21"
-  sha256 "459117eb424e34d8fd7ab9c794b3f3679449ff211997af801e68ab00b201ee91"
+  url "https://github.com/zdevito/terra/archive/release-2015-08-03.tar.gz"
+  version "2015-08-03"
+  sha256 "13e7ecfa1ac5ab5cf932d1a481d604739bae6d2afdafd326c1678b648881548b"
   head "https://github.com/zdevito/terra.git"
 
   depends_on "llvm35" => :build
