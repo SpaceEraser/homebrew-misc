@@ -5,6 +5,7 @@ class Anax < Formula
   head "https://github.com/miguelmartin75/anax.git"
 
   option "with-tests", "Build tests"
+  option "with-debug", "Build debug library"
   option "with-docs", "Build documentation"
   option "with-examples", "Build examples"
   option "with-static", "Build only static libraries"
@@ -14,14 +15,28 @@ class Anax < Formula
 
   def install
     args = std_cmake_args
-    args << "-DBUILD_TESTS=true" if build.with? "tests"
-    args << "-DBUILD_DOCS=true" if build.with? "docs"
-    args << "-DBUILD_EXAMPLES=true" if build.with? "examples"
-    args << "-DBUILD_SHARED_LIBS=false" if build.with? "static"
-    args << "-DANAX_32_BIT_ENTITY_IDS=true" if build.with? "32bit-ids"
+    args << "-DBUILD_TESTS=ON" if build.with? "tests"
+    args << "-DBUILD_DOCS=ON" if build.with? "docs"
+    args << "-DBUILD_EXAMPLES=ON" if build.with? "examples"
+    args << "-DBUILD_SHARED_LIBS=OFF" if build.with? "static"
+    args << "-DANAX_32_BIT_ENTITY_IDS=ON" if build.with? "32bit-ids"
 
     system "cmake", ".", *args
 
     system "make", "install"
+
+    if build.with? "debug"
+      args = std_cmake_args
+      args << "-DCMAKE_BUILD_TYPE=DEBUG"
+      args << "-DCMAKE_C_FLAGS_RELEASE=-DDEBUG"
+      args << "-DCMAKE_CXX_FLAGS_RELEASE=-DDEBUG"
+      
+      args << "-DBUILD_SHARED_LIBS=OFF" if build.with? "static"
+      args << "-DANAX_32_BIT_ENTITY_IDS=ON" if build.with? "32bit-ids"
+
+      system "cmake", ".", *args
+
+      system "make", "install"
+    end
   end
 end
