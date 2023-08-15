@@ -1,7 +1,7 @@
 ENV["B_BUILD_TYPE"] = "Release"
 cask "input-leap" do
     version "2.4.0"
-    url "https://github.com/input-leap/input-leap.git" revision: ad3c0e32672cc1916173ac5539bf80104d12c9f8
+    url "https://github.com/input-leap/input-leap.git", revision: "ad3c0e32672cc1916173ac5539bf80104d12c9f8"
     name "Input Leap"
     desc "Open-source KVM software"
     homepage "https://github.com/input-leap/input-leap"
